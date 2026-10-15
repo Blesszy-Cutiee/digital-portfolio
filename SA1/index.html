@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Portfolio & CertiFolio</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand-logo">
+        <span class="brand-icon">
+          <img src="Logo/logo.png"alt="logo" class="logo-img">
+          </span>
+
+        <div class="brand-text">
+          <span class="brand-title">CertiFolio</span>
+          <span class="brand-sub">Seminar & Learning Portfolio</span>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#home">HOME</a>
+        <a href="#about">ABOUT</a>
+        <a href="#seminars">SEMINARS</a>
+        <a href="#contact">CONTACT</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="btn btn-outline" id="editProfileBtn">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79-4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          Edit Profile
+        </button>
+        <button class="btn btn-primary" id="addCertBtn">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+          Add Certificate / Badge
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+      <div class="hero-container">
+        <div class="hero-text-content">
+          <p class="hero-greeting">Hello, I'm</p>
+          <h1 class="hero-name" id="heroName">Nabus,<br>Blesszy Joy</h1>
+          <p class="hero-subtitle" id="heroTitle">WEB & PRODUCT DESIGNER</p>
+          <p class="hero-description" id="heroBio">
+            I craft strategic, beautiful and impactful digital experiences that connect brands with people.
+          </p>
+          <div class="hero-cta">
+            <a href="#seminars" class="btn btn-dark">EXPLORE&rarr;</a>
+          </div>
+        </div>
+
+        <div class="hero-image-wrapper">
+          <div class="arch-frame">
+            <img id="heroImage" src="Profile/joy.png" alt="Profile Portrait">
+          </div>
+          <div class="badge-circle">
+            <p>DESIGN THINKING MAKES IDEAS REAL</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="about" class="stats-section">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-label">TOTAL SEMINARS</span>
+          <span class="stat-value" id="statSeminars">7</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">HOURS LEARNED</span>
+          <span class="stat-value" id="statHours">17 hrs</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">CERTIFICATES</span>
+          <span class="stat-value" id="statCerts">7</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">BADGES</span>
+          <span class="stat-value" id="statBadges">1</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seminars Section -->
+    <section id="seminars" class="seminars-section">
+      <div class="container">
+        <!-- Category Filters -->
+        <div class="categories-scroll" id="categoriesContainer"></div>
+
+        <!-- Filter Controls -->
+        <div class="filter-bar">
+          <div class="search-box">
+            <svg class="search-icon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input type="text" id="searchInput" placeholder="Search seminar, provider, or badge..." />
+          </div>
+          <div class="sort-box">
+            <label for="sortSelect">Sort:</label>
+            <select id="sortSelect">
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Seminar Cards -->
+        <div class="cards-grid" id="seminarsGrid"></div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="empty-state hidden">
+          <div class="empty-icon">🔍</div>
+          <h3>No Seminars or Certificates Found</h3>
+          <p>Try adjusting your search keywords or category filters, or click below to add a new seminar entry.</p>
+          <button class="btn btn-primary" onclick="openModal('addModal')">+ ADD NEW CERTIFICATE</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="contact" class="footer">
+    <div class="container footer-content">
+      <p>&copy; <span id="year"></span> CertiFolio. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scroll To Top Button -->
+  <button id="backToTopBtn" class="back-to-top" title="Back to Top">
+    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+  </button>
+
+  <!-- MODAL: Edit Profile -->
+  <div id="profileModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>Edit Profile Information</h2>
+        <button class="close-btn" onclick="closeModal('profileModal')">&times;</button>
+      </div>
+      <form id="profileForm" class="modal-body">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="profNameInput" required />
+        </div>
+        <div class="form-group">
+          <label>Professional Title</label>
+          <input type="text" id="profTitleInput" required />
+        </div>
+        <div class="form-group">
+          <label>Bio Narrative</label>
+          <textarea id="profBioInput" rows="3" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Profile Picture</label>
+          <input type="file" id="profImgInput" accept="image/*" />
+          <small>Leave empty to keep existing image</small>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-outline" onclick="closeModal('profileModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Profile</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Add New Certificate / Badge -->
+  <div id="addModal" class="modal-overlay hidden">
+    <div class="modal-card modal-large">
+      <div class="modal-header">
+        <h2>Add Seminar Certificate / Badge & Proof</h2>
+        <button class="close-btn" onclick="closeModal('addModal')">&times;</button>
+      </div>
+      <form id="addSeminarForm" class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Entry Type *</label>
+            <select id="addType" required>
+              <option value="Certificate">Certificate</option>
+              <option value="Badge">Badge</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Seminar / Event Title *</label>
+            <input type="text" id="addTitle" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Organization / Provider *</label>
+            <input type="text" id="addProvider" required />
+          </div>
+          <div class="form-group">
+            <label>Category *</label>
+            <select id="addCategory" required>
+              <option value="Tech & AI">Emerging Trends and Innovation in IT</option>
+              <option value="Leadership">Leadership</option>
+              <option value="Design & UX">Design & UX</option>
+              <option value="Soft Skills">Soft Skills</option>
+              <option value="Workshop">Workshop</option>
+              <option value="Badge Achievement">Badge Achievement</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Completion Date *</label>
+            <input type="date" id="addDate" required />
+          </div>
+          <div class="form-group">
+            <label>Hours Learned *</label>
+            <input type="number" id="addHours" min="1" value="8" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Certificate / Badge Image *</label>
+            <input type="file" id="addCertImage" accept="image/*" required />
+          </div>
+          <div class="form-group">
+            <label>Attendance Screenshot / Proof File (Optional)</label>
+            <input type="file" id="addDocFile" accept="image/*,.pdf,.doc,.docx" />
+            <small>e.g., Zoom selfie, attendance sheet, reflection photo</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Seminar Narrative & Experience *</label>
+          <textarea id="addNarrative" rows="3" placeholder="Describe your overall experience, main insights, or summary..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Key Takeaways (One per line)</label>
+          <textarea id="addTakeaways" rows="3" placeholder="- Learned key concept A&#10;- Practiced hands-on skill B"></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Key Speaker / Facilitator</label>
+            <input type="text" id="addSpeaker" placeholder="e.g. Dr. Jane Doe" />
+          </div>
+          <div class="form-group">
+            <label>Acquired Skills (Comma separated)</label>
+            <input type="text" id="addSkills" placeholder="e.g. Figma, UI Systems, Accessibility" />
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-outline" onclick="closeModal('addModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Entry</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: View Narrative, Certificate & Attendance Proof -->
+  <div id="detailModal" class="modal-overlay hidden">
+    <div class="modal-card modal-large">
+      <div class="modal-header">
+        <div id="detailBadgeContainer"></div>
+        <button class="close-btn" onclick="closeModal('detailModal')">&times;</button>
+      </div>
+      <div class="modal-body" id="detailContent"></div>
+    </div>
+  </div>
+
+  <!-- MODAL: Fullscreen Image Lightbox -->
+  <div id="lightboxModal" class="lightbox-overlay hidden" onclick="closeModal('lightboxModal')">
+    <span class="lightbox-close">&times; Close Preview</span>
+    <img id="lightboxImg" class="lightbox-img" src="" alt="Preview" />
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
